@@ -12,22 +12,10 @@ import { Award } from '@/app/types';
 
 export default function Home() {
   const [selectedAward, setSelectedAward] = useState<Award | null>(null);
-
-  const handleLoginClick = useCallback(() => {
-    // TODO: Implementar lógica de login
-    console.log('Login clicked');
-  }, []);
-
   const handleAwardSelect = useCallback((award: Award) => {
     setSelectedAward(award);
     console.log('Award selected:', award);
   }, []);
-
-  const handleAwardBuy = useCallback((award: Award) => {
-    // TODO: Implementar lógica de compra
-    console.log('Buy clicked for award:', award);
-  }, []);
-
   const handleCheckDay = useCallback(() => {
     // TODO: Implementar lógica para verificar día
     console.log('Check day clicked');
@@ -38,9 +26,15 @@ export default function Home() {
     console.log('Check numbers clicked');
   }, []);
 
+  const handleAwardBuy = useCallback((award: Award) => {
+    // simple buy flow: add to cart or trigger purchase
+    alert(`¡${award.title} agregado al carrito!`);
+    console.log('Buy clicked for award:', award);
+  }, []);
+
   return (
     <>
-      <Navbar onLoginClick={handleLoginClick} />
+      <Navbar />
 
       <main className="pt-20">
         <HeroSection
@@ -55,6 +49,7 @@ export default function Home() {
         <AwardsSection
           awards={raffleData.awards}
           onAwardSelect={handleAwardSelect}
+          onAwardBuy={handleAwardBuy}
         />
 
         <SocialLinks

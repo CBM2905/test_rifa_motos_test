@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #050505; /* muy negro */
+  --foreground: #e9e6da; /* off-white */
+  --muted: #bdb7a0; /* texto secundario */
+  --gold: #d4af37; /* dorado principal */
+  --gold-dark: #b8860b; /* dorado oscuro para gradientes */
 }
 
 @theme inline {
@@ -14,13 +17,30 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #050505;
+    --foreground: #e9e6da;
   }
 }
 
+/* Global body styles for the black & gold theme */
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Links/accent */
+a { color: var(--gold); }
+
+/* Small helpers */
+.text-gold { color: var(--gold); }
+.bg-gold { background: linear-gradient(90deg, var(--gold-dark), var(--gold)); }
+.ring-gold { box-shadow: 0 0 0 3px rgba(212,175,55,0.08); }
+
+/* Buttons */
+.btn-gold { background: linear-gradient(90deg, var(--gold), var(--gold-dark)); color: #000; }
+
+.card-dark { background: #0b0b0b; border: 1px solid rgba(212,175,55,0.06); }
+

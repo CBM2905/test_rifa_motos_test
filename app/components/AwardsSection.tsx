@@ -1,35 +1,41 @@
 import { Award } from "@/app/types";
-import AwardCard from "./AwardCard";
+import AwardCard from "@/app/components/AwardCard";
 
 interface AwardsSectionProps {
   awards: Award[];
   onAwardSelect?: (award: Award) => void;
+  onAwardBuy?: (award: Award) => void;
 }
 
 export default function AwardsSection({ 
   awards, 
-  onAwardSelect 
+  onAwardSelect,
+  onAwardBuy,
 }: AwardsSectionProps) {
+  const award = awards && awards.length > 0 ? awards[0] : null;
+
+  if (!award) return null;
+
   return (
-    <section className="py-16 px-4 bg-gray-50">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
-            Premios Disponibles
+    <section className="py-16 px-4 bg-[#050505]">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-3xl lg:text-4xl font-bold text-gold mb-2">
+            Premio Destacado
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Selecciona un premio y participa en nuestra rifa. Cada compra te acerca más a ganar.
+          <p className="text-muted max-w-2xl mx-auto">
+            Compra un ticket para participar en la rifa.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {awards.map((award) => (
+        <div className="flex justify-center">
+          <div className="w-full max-w-sm">
             <AwardCard
-              key={award.id}
               award={award}
               onSelect={() => onAwardSelect?.(award)}
+              onBuy={() => onAwardBuy?.(award)}
             />
-          ))}
+          </div>
         </div>
       </div>
     </section>

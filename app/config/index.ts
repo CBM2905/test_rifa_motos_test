@@ -31,3 +31,4 @@ export const UI_CONFIG = {
     error: 'red-600',
   },
 };
+    
