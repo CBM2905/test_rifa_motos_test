@@ -18,24 +18,28 @@ export const raffleData: RaffleData = {
       title: "MT 09 TICKETS",
       description: "1 melon",
       image: "https://wizzpro.s3.amazonaws.com/0.69041249227655691000086369.jpg",
+      price: 1600,
     },
     {
       id: 1295,
       title: "MT 09 TICKETS",
       description: "1 melon",
       image: "https://wizzpro.s3.amazonaws.com/0.88812588131235651000086370.jpg",
+      price: 1600,
     },
     {
       id: 1297,
       title: "MT 09 TICKETS",
       description: "1 melon",
       image: "https://wizzpro.s3.amazonaws.com/0.0108693045756174111000086372.jpg",
+      price: 1600,
     },
     {
       id: 1299,
       title: "MT 09 TICKETS",
       description: "1 melon",
       image: "https://wizzpro.s3.amazonaws.com/0.58755861407372991000086374.jpg",
+      price: 1600,
     },
   ],
 };

@@ -1,4 +1,5 @@
 import { Award } from "@/app/types";
+import { useRouter } from "next/navigation";
 
 interface AwardCardProps {
   award: Award;
@@ -7,6 +8,47 @@ interface AwardCardProps {
 }
 
 export default function AwardCard({ award, onSelect, onBuy }: AwardCardProps) {
+  const router = useRouter();
+
+  const handleBuy = async () => {
+    try {
+      const response = await fetch("/api/create-payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ticketId: award.id,
+          amount: award.price,
+          email: "user@example.com", // Replace with actual user email
+        }),
+      });
+
+      // Read response as text first
+      const text = await response.text();
+      
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (parseError) {
+        console.error("Failed to parse payment response:", parseError);
+        console.error("Response text:", text);
+        alert("Error: Invalid response from payment service");
+        return;
+      }
+
+      if (response.ok && data.payment_link) {
+        router.push(data.payment_link);
+      } else {
+        console.error("Payment creation failed:", data);
+        alert(`Error: ${data.error || 'Failed to create payment'}`);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An unexpected error occurred.");
+    }
+  };
+
   return (
     <div
       className="card-dark rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden cursor-pointer transform hover:scale-105 group"
@@ -37,7 +79,7 @@ export default function AwardCard({ award, onSelect, onBuy }: AwardCardProps) {
         <button
           onClick={(e) => {
             e.stopPropagation();
-            onBuy?.();
+            handleBuy();
           }}
           className="w-full py-2 rounded transition font-semibold shadow-md hover:shadow-lg transform hover:scale-105 btn-gold"
         >
